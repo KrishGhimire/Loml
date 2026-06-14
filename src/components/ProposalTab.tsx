@@ -19,7 +19,7 @@ export const ProposalTab: React.FC = () => {
 
     // Randomize position in a safe viewport rectangle (usually 20% to 80% range)
     const randomTop = 15 + Math.random() * 65;
-    const randomLeft = 10 + Math.random() * 70;
+    const randomLeft = 10 + Math.random() * 50;
 
     setNoPosition({
       top: `${randomTop}%`,
@@ -124,7 +124,7 @@ export const ProposalTab: React.FC = () => {
           </p>
 
           {/* Interactive Buttons Container */}
-          <div className="w-full relative h-40 mt-10">
+          <div className="relative w-full overflow-hidden">
             
             {/* YES BUTTON (LARGE, HEART PULSE) */}
             <button
@@ -143,7 +143,8 @@ export const ProposalTab: React.FC = () => {
               className="absolute py-2 px-5 bg-white/40 hover:bg-white/65 text-rose-800/80 font-bold border border-white/50 rounded-full text-xs shadow-sm transition-all duration-150 cursor-pointer select-none pointer-events-auto"
               style={{
                 top: noPosition.top,
-                left: noPosition.left
+                left: noPosition.left,
+                transform: "translateX(-50%)"
               }}
               id="proposal-no-btn"
             >
