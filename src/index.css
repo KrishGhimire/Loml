@@ -1,8 +1,15 @@
 @import "tailwindcss";
-html, body {
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
 }
 
+* {
+  box-sizing: border-box;
+}
 @utility glass-card {
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(12px);

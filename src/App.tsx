@@ -63,8 +63,8 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen mesh-gradient flex items-center justify-center p-0 md:p-6 font-sans relative overflow-x-hidden text-glass-deep">
-      <div className="min-h-screen overflow-x-hidden"></div> 
+    <div className="min-h-dvh mesh-gradient flex items-center justify-center p-0 md:p-6 font-sans relative overflow-x-hidden text-glass-deep">
+
       {/* Absolute background floating love particles */}
       {floatingHearts.map((h) => (
         <Heart
@@ -72,7 +72,8 @@ function AppContent() {
           className="absolute text-rose-400/10 pointer-events-none fill-rose-400/5"
           style={{
             bottom: "-20px",
-            left: `${h.left}%`,
+            left: `${Math.min(h.left, 95)}%`,
+            transform: "translateX(-50%)",
             width: `${h.size}px`,
             height: `${h.size}px`,
             animation: `floatUpApp ${h.delay + 6}s infinite linear`,
@@ -94,7 +95,7 @@ function AppContent() {
       <AudioController />
 
       {/* Glassmorphic Smartphone Container Frame */}
-      <div className="w-full max-w-md h-[100dvh] md:h-[820px] bg-white/40 backdrop-blur-lg shadow-2xl border-0 md:border-8 border-rose-950/25 md:rounded-[42px] flex flex-col justify-between overflow-hidden relative">
+      <div className="w-full max-w-md h-dvh md:h-[820px] bg-white/40 backdrop-blur-lg shadow-2xl border-0 md:border-8 border-rose-950/25 md:rounded-[42px] flex flex-col overflow-hidden relative">
        
         {/* Top Notch/Speaker visual bar for simulator look on desktops */}
         <div className="hidden md:flex h-6 bg-rose-100/10 w-full items-center justify-center pointer-events-none relative z-40 border-b border-rose-200/20">
@@ -104,7 +105,7 @@ function AppContent() {
         </div>
 
         {/* --- HEADER BAR --- */}
-        <header className="sticky top-0 bg-white/35 border-b border-white/45 backdrop-blur px-5 py-3.5 z-40 flex justify-between items-center shadow-sm text-glass-deep">
+        <header className="sticky top-0 shrink-0 bg-white/35 border-b border-white/45 backdrop-blur px-5 py-3.5 z-40 flex justify-between items-center shadow-sm text-glass-deep">
           <div className="flex items-center gap-1.5">
             <span className="text-xl animate-bounce" style={{ animationDuration: "2s" }}>👑</span>
             <div>
@@ -117,14 +118,14 @@ function AppContent() {
             </div>
           </div>
           
-          <div className="flex items-center gap-1 bg-white/45 border border-white/50 rounded-full px-2.5 py-0.5 text-[9px] text-rose-800 font-bold">
+          <div className="flex items-center gap-1 bg-white/45 border border-white/50 rounded-full px-2.5 py-0.5 text-[10px] text-rose-800 font-bold">
             <Sparkles size={8} className="animate-spin text-rose-500" style={{ animationDuration: "6s" }} />
             <span>21 YEARS OLD</span>
           </div>
         </header>
 
         {/* --- SCROLLABLE WORKSPACE / VIEWPORT --- */}
-        <main className="flex-1 overflow-y-scroll bg-transparent relative">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden bg-transparent relative overscroll-contain">
           
           {/* Active section selector view */}
           {activeTab === "time" && <TimeTab />}
@@ -138,104 +139,109 @@ function AppContent() {
         </main>
 
         {/* --- DOCK-LIKE BOTTOM APP TRANSIT BAR --- */}
-        <nav className="bg-white/45 border-t border-white/50 backdrop-blur pb-4 pt-2.5 px-4 z-40 flex items-center justify-between gap-1">
+        <nav
+          className="shrink-0 bg-white/45 border-t border-white/50 backdrop-blur pt-2 px-1 grid grid-cols-7 z-40"
+          style={{
+          paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))"
+          }}
+>
           
           {/* Time timeline page */}
           <button
             onClick={() => handleTabChange("time")}
-            className={`flex flex-col items-center gap-1 flex-1 py-1 px-1 rounded-2xl transition-all ${
+            className={`flex flex-col items-center justify-center min-w-0 py-1 px-0.5 rounded-xl transition-all ${
               activeTab === "time" 
-                ? "text-rose-800 bg-white/60 font-bold scale-103 shadow-xs border border-white/40" 
+                ? "text-rose-800 bg-white/60 font-bold scale-105 shadow-sm border border-white/40" 
                 : "text-rose-900/60 hover:text-rose-950"
             }`}
             id="nav-tab-time"
           >
             <Clock size={16} className={activeTab === "time" ? "stroke-[2.5px]" : ""} />
-            <span className="text-[9px] tracking-tight truncate w-full text-center">Clock</span>
+            <span className="text-[10px] tracking-tight truncate w-full text-center">Clock</span>
           </button>
 
           {/* Music record page */}
           <button
             onClick={() => handleTabChange("songs")}
-            className={`flex flex-col items-center gap-1 flex-1 py-1 px-1 rounded-2xl transition-all ${
+            className={`flex flex-col items-center justify-center min-w-0 py-1 px-0.5 rounded-xl transition-all ${
               activeTab === "songs" 
-                ? "text-rose-800 bg-white/60 font-bold scale-103 shadow-xs border border-white/40" 
+                ? "text-rose-800 bg-white/60 font-bold scale-105 shadow-sm border border-white/40" 
                 : "text-rose-900/60 hover:text-rose-950"
             }`}
             id="nav-tab-songs"
           >
             <Disc size={16} className={activeTab === "songs" ? "animate-spin" : ""} style={{ animationDuration: "5s" }} />
-            <span className="text-[9px] tracking-tight truncate w-full text-center">Songs</span>
+            <span className="text-[10px] tracking-tight truncate w-full text-center">Songs</span>
           </button>
 
           {/* Album polaroids page */}
           <button
             onClick={() => handleTabChange("photos")}
-            className={`flex flex-col items-center gap-1 flex-1 py-1 px-1 rounded-2xl transition-all ${
+            className={`flex flex-col items-center justify-center min-w-0 py-1 px-0.5 rounded-xl transition-all ${
               activeTab === "photos" 
-                ? "text-rose-800 bg-white/60 font-bold scale-103 shadow-xs border border-white/40" 
+                ? "text-rose-800 bg-white/60 font-bold scale-105 shadow-sm border border-white/40" 
                 : "text-rose-900/60 hover:text-rose-950"
             }`}
             id="nav-tab-photos"
           >
             <Camera size={16} className={activeTab === "photos" ? "stroke-[2.5px]" : ""} />
-            <span className="text-[9px] tracking-tight truncate w-full text-center">Snaps</span>
+            <span className="text-[10px] tracking-tight truncate w-full text-center">Snaps</span>
           </button>
 
           {/* Flowers watering page */}
           <button
             onClick={() => handleTabChange("flowers")}
-            className={`flex flex-col items-center gap-1 flex-1 py-1 px-1 rounded-2xl transition-all ${
+            className={`flex flex-col items-center justify-center min-w-0 py-1 px-0.5 rounded-xl transition-all ${
               activeTab === "flowers" 
-                ? "text-rose-800 bg-white/60 font-bold scale-103 shadow-xs border border-white/40" 
+                ? "text-rose-800 bg-white/60 font-bold scale-105 shadow-sm border border-white/40" 
                 : "text-rose-900/60 hover:text-rose-950"
             }`}
             id="nav-tab-flowers"
           >
             <Flower2 size={16} className={activeTab === "flowers" ? "stroke-[2.5px]" : ""} />
-            <span className="text-[9px] tracking-tight truncate w-full text-center">Flora</span>
+            <span className="text-[10px] tracking-tight truncate w-full text-center">Flora</span>
           </button>
 
           {/* Scratch envelope letter page */}
           <button
             onClick={() => handleTabChange("message")}
-            className={`flex flex-col items-center gap-1 flex-1 py-1 px-1 rounded-2xl transition-all ${
+            className={`flex flex-col items-center justify-center min-w-0 py-1 px-0.5 rounded-xl transition-all ${
               activeTab === "message" 
-                ? "text-rose-800 bg-white/60 font-bold scale-103 shadow-xs border border-white/40" 
+                ? "text-rose-800 bg-white/60 font-bold scale-105 shadow-sm border border-white/40" 
                 : "text-rose-900/60 hover:text-rose-950"
             }`}
             id="nav-tab-message"
           >
             <Mail size={16} className={activeTab === "message" ? "stroke-[2.5px]" : ""} />
-            <span className="text-[9px] tracking-tight truncate w-full text-center">Letter</span>
+            <span className="text-[10px] tracking-tight truncate w-full text-center">Letter</span>
           </button>
 
           {/* Distance apology holder page */}
           <button
             onClick={() => handleTabChange("apology")}
-            className={`flex flex-col items-center gap-1 flex-1 py-1 px-1 rounded-2xl transition-all ${
+            className={`flex flex-col items-center justify-center min-w-0 py-1 px-0.5 rounded-xl transition-all ${
               activeTab === "apology" 
-                ? "text-rose-800 bg-white/60 font-bold scale-103 shadow-xs border border-white/40" 
+                ? "text-rose-800 bg-white/60 font-bold scale-105 shadow-sm border border-white/40" 
                 : "text-rose-900/60 hover:text-rose-950"
             }`}
             id="nav-tab-apology"
           >
             <ShieldAlert size={16} className={activeTab === "apology" ? "stroke-[2.5px]" : ""} />
-            <span className="text-[9px] tracking-tight truncate w-full text-center">Sorry</span>
+            <span className="text-[10px] tracking-tight truncate w-full text-center">Sorry</span>
           </button>
 
           {/* Big life proposal tab */}
           <button
             onClick={() => handleTabChange("proposal")}
-            className={`flex flex-col items-center gap-1 flex-1 py-1 px-1 rounded-2xl transition-all ${
+            className={`flex flex-col items-center justify-center min-w-0 py-1 px-0.5 rounded-xl transition-all ${
               activeTab === "proposal" 
-                ? "text-rose-800 bg-rose-200/50 scale-105 font-bold border border-white/60 shadow-xs" 
+                ? "text-rose-800 bg-rose-200/50 scale-105 font-bold border border-white/60 shadow-sm" 
                 : "text-rose-900/60 hover:text-rose-950"
             }`}
             id="nav-tab-proposal"
           >
             <Heart size={16} className={`text-rose-500 fill-current ${activeTab === "proposal" ? "animate-pulse" : ""}`} />
-            <span className="text-[9px] tracking-tight truncate w-full text-center font-bold">Proposal</span>
+            <span className="text-[10px] tracking-tight truncate w-full text-center font-bold">Proposal</span>
           </button>
 
         </nav>
