@@ -1,0 +1,6 @@
+{
+  "name": "My Love - 21st Birthday Gift",
+  "description": "An interactive, love-themed mobile website created for your 21st birthday, filled with music, flowers, letters, apologies, and a lifelong question.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 32px 0 rgba(230, 150, 170, 0.15);
+}
+
+@utility mesh-gradient {
+  background-color: #FFF0F3;
+  background-image: 
+    radial-gradient(at 0% 0%, #FFD1D1 0%, transparent 50%),
+    radial-gradient(at 100% 0%, #FFE4E1 0%, transparent 50%),
+    radial-gradient(at 100% 100%, #FFB6C1 0%, transparent 50%),
+    radial-gradient(at 0% 100%, #FFFACD 0%, transparent 50%);
+}
+
+.text-glass-deep {
+  color: #5D2E46;
+}
+
+.bg-glass-sweet {
+  background-color: #FFF0F3;
+}
