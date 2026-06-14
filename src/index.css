@@ -11,9 +11,7 @@ body {
 * {
   box-sizing: border-box;
 }
-* {
-  outline: 1px solid red;
-}
+
 @utility glass-card {
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(12px);

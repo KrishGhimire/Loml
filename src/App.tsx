@@ -94,8 +94,8 @@ function AppContent() {
       <AudioController />
 
       {/* Glassmorphic Smartphone Container Frame */}
-      <div className="w-full max-w-md h-screen md:h-[820px] bg-white/40 backdrop-blur-lg shadow-2xl border-0 md:border-8 border-rose-950/25 md:rounded-[42px] flex flex-col justify-between overflow-hidden relative">
-        
+      <div className="w-full max-w-md h-[100dvh] md:h-[820px] bg-white/40 backdrop-blur-lg shadow-2xl border-0 md:border-8 border-rose-950/25 md:rounded-[42px] flex flex-col justify-between overflow-hidden relative">
+      <div className="min-h-screen overflow-x-hidden"></div>  
         {/* Top Notch/Speaker visual bar for simulator look on desktops */}
         <div className="hidden md:flex h-6 bg-rose-100/10 w-full items-center justify-center pointer-events-none relative z-40 border-b border-rose-200/20">
           <div className="w-28 h-4 bg-neutral-900 rounded-b-xl flex items-center justify-center">
@@ -124,7 +124,7 @@ function AppContent() {
         </header>
 
         {/* --- SCROLLABLE WORKSPACE / VIEWPORT --- */}
-        <main className="flex-1 overflow-y-auto bg-transparent relative">
+        <main className="flex-1 overflow-y-scroll bg-transparent relative">
           
           {/* Active section selector view */}
           {activeTab === "time" && <TimeTab />}
