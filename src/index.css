@@ -1,15 +1,6 @@
 @import "tailwindcss";
-html {
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
-}
-
-body {
+html, body {
   overflow-x: hidden;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 @utility glass-card {
